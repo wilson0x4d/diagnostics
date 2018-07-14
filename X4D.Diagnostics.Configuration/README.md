@@ -6,8 +6,6 @@ This is only intended to be used from a .NET Core application, attempts to use t
 
 Eventually, ideally, this sort of "polyfill" will not be necessary.
 
-> github issues?
-
 
 ### Configuration and Usage
 

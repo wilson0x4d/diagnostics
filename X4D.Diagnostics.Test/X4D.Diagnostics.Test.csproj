@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <RootNamespace>X4D.Diagnostics</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="systemDiagnostics.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="systemDiagnostics.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X4D.Diagnostics.Configuration\X4D.Diagnostics.Configuration.csproj" />
+    <ProjectReference Include="..\X4D.Diagnostics.Counters\X4D.Diagnostics.Counters.csproj" />
+    <ProjectReference Include="..\X4D.Diagnostics\X4D.Diagnostics.csproj" />
+  </ItemGroup>
+
+</Project>
