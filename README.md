@@ -1,5 +1,5 @@
 ﻿# X4D Diagnostics
-[![Build status](https://ci.appveyor.com/api/projects/status/d1nvjxg6gfjt3in3?svg=true)](https://ci.appveyor.com/project/wilson0x4d/diagnostics)
+[![Build status](https://ci.appveyor.com/api/projects/status/d1nvjxg6gfjt3in3?svg=true)](https://ci.appveyor.com/project/wilson0x4d/diagnostics) [![NuGet](https://img.shields.io/nuget/v/X4D.Diagnostics.svg)](https://www.nuget.org/packages/X4D.Diagnostics) [![Downloads](https://img.shields.io/nuget/dt/X4D.Diagnostics.svg)](https://www.nuget.org/api/v2/package/X4D.Diagnostics/)
 
 Shared interfaces, implementations and tools for an improved Diagnostic experience when writing **.NET Standard** libraries.
 
