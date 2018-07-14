@@ -15,7 +15,7 @@ namespace X4D.Diagnostics.Counters
             {
                 counter.Increment(item);
             }
-            Assert.AreEqual(953, counter.Value);
+            Assert.AreEqual(589, counter.Value);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace X4D.Diagnostics.Counters
             {
                 counter.Increment(count);
             }
-            Assert.AreEqual(116, counter.Value);
+            Assert.AreEqual(72, counter.Value);
 
             // verify 'non-tween' result
             // with additional series: 34,55,89,144,233,377, !610! ,987,1597,2584,4181,6765,10946,17711
@@ -26,7 +26,7 @@ namespace X4D.Diagnostics.Counters
             {
                 counter.Increment(count);
             }
-            Assert.AreEqual(610, counter.Value);
+            Assert.AreEqual(377, counter.Value);
 
             // verify performant enough not to timeout test tool
             var fib = FibonacciHelper.ComputeTo(127).ToArray();
@@ -34,7 +34,7 @@ namespace X4D.Diagnostics.Counters
             {
                 counter.Increment(fib[i++ % fib.Length]);
             }
-            Assert.AreEqual(433494437, counter.Value);
+            Assert.AreEqual(4807526976, counter.Value);
 
             // confirm outlier does not pull average
             counter.Reset();
