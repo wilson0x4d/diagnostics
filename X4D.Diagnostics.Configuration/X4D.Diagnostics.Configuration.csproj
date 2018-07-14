@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0.0</Version>
+    <Authors>Shaun Wilson x4d@mrshaunwilson.com</Authors>
+    <Company>Shaun Wilson</Company>
+    <Description>This package exists to solve problems with loading the `system.diagnostics` config section under **.NET Core**.</Description>
+    <Copyright>Copyright (C) Shaun Wilson</Copyright>
+    <PackageLicenseUrl>https://github.com/wilson0x4d/diagnostics/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/wilson0x4d/diagnostics</PackageProjectUrl>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/3208827</PackageIconUrl>
+    <PackageTags>netstandard system diagnostics configuration</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
