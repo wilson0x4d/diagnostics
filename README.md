@@ -1,4 +1,5 @@
 ﻿# X4D Diagnostics
+[![Build status](https://ci.appveyor.com/api/projects/status/d1nvjxg6gfjt3in3?svg=true)](https://ci.appveyor.com/project/wilson0x4d/diagnostics)
 
 Shared interfaces, implementations and tools for an improved Diagnostic experience when writing **.NET Standard** libraries.
 
