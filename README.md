@@ -3,7 +3,7 @@
 
 Shared interfaces, implementations and tools for an improved Diagnostic experience when writing **.NET Standard** libraries.
 
-> NOTE: This is a work-in-progress, while there are some basic verification tests you may still find bugs. Further, as support within .NET Standard, .NET Core and .NET Framework so too may the behavior of this code.
+> NOTE: This is a work-in-progress, while there are some basic verification tests you may still find bugs. Further, as support within .NET Standard, .NET Core and .NET Framework changes so too may the behavior of this code.
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
 <!-- code_chunk_output -->
@@ -25,19 +25,20 @@ Shared interfaces, implementations and tools for an improved Diagnostic experien
 
 the `X4D.Diagnostics.Counters` namespace exposes a lightweight framework for defining performance counters, categories of counters, and to easily access cached instances of those counters at run-time.
 
+
 ### Counter Integration
 
-Consider the following code which increment the counters `InPerSec`, `ErrorsPerSec` and `OutPerSec` and `PendingTimeAverage`:
+Consider the following code which increments the counters `InPerSec`, `ErrorsPerSec` and `OutPerSec` and `PendingTimeAverage`:
 
 ```csharp
     public sealed class Foo
     {
-        private static readonly Performance = typeof(Foo).GetCounterCategory<FakeCounterCategory>();
+        private readonly FakeCounterCategory _performance = typeof(Foo).GetCounterCategory<FakeCounterCategory>();
 
         public async Task Bar()
         {
             var stopwatch = Stopwatch.StartNew();
-            Performance.InPerSec.Increment();
+            _performance.InPerSec.Increment();
             try
             {
                 Console.WriteLine("Hello, World!");
@@ -46,10 +47,10 @@ Consider the following code which increment the counters `InPerSec`, `ErrorsPerS
             {
                 if (System.Runtime.InteropServices.Marshal.GetExceptionCode() != 0)
                 {
-                    Performance.ErrorsPerSec.Increment();
+                    _performance.ErrorsPerSec.Increment();
                 }
-                Performance.PendingTimeAverage.Increment(stopwatch);
-                Performance.OutPerSec.Increment();
+                _performance.PendingTimeAverage.Increment(stopwatch);
+                _performance.OutPerSec.Increment();
             }
         }
     }
@@ -103,7 +104,7 @@ The `FakeCounterCategory` class used above defines a number of counters. Their a
     }
 ```
 
-You may have noticed that the `Bar()` method above only incremented `InPerSec` and not `InTotal`, this is because `RatePerSecond` implementation will use `InTotal` as its numerator.  This has useful implications, for example there is no need to increment `PendingCounter` since it is driven by the `InTotal` and `OutTotal` counters, which are themselves driven by incrementing the `InperSec` and `OutPerSec` counters. This allows us to easy introduce counters which use existing counters as a basis, without needing to update any existing counter integration points (something that is usually relegated/deferred to a post-ingest process first for fear of breaking existing code.)
+You may notice that `Bar()` above only incremented `InPerSec` and not `InTotal`, this is because `RatePerSecond` implementation will use `InTotal` as its numerator.  This has useful implications, for example there is no need to increment `PendingCounter` since it is driven by the `InTotal` and `OutTotal` counters, which are themselves driven by incrementing the `InperSec` and `OutPerSec` counters. This allows us to easy introduce counters which use existing counters as a basis, without needing to update any existing counter integration points (something that is usually relegated/deferred to a post-ingest process first for fear of breaking existing code.)
 
 A good practice is to implement your counters so that counters which are interdependent share a common base name. This is not enforced, but convenient. In the above example you can see common base names such as "In", "Out" and "Errors", it's reasonable to assume that any "XxxPerSecond" counter will be incrementing a relevant "Xxx" base.
 
