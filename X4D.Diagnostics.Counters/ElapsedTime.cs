@@ -37,7 +37,7 @@ namespace X4D.Diagnostics.Counters
             Seconds = Milliseconds * 1000,
             Minutes = Seconds * 60,
             Hours = Minutes * 60,
-            Days = Hours * 24,
+            Days = Hours * 24
         }
 
         /// <summary>

@@ -37,6 +37,15 @@
             object syncRoot = null)
         {
             _observationType = observationType;
+            switch (_observationType)
+            {
+                case ObservationType.Minimum:
+                    _value = long.MaxValue;
+                    break;
+                case ObservationType.Maximum:
+                    _value = long.MinValue;
+                    break;
+            }
             _lock = syncRoot ?? new object();
         }
 
