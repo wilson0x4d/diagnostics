@@ -56,7 +56,11 @@
         {
             get
             {
-                return _value;
+                return _value == long.MaxValue && _observationType == ObservationType.Minimum
+                    ? 0
+                    : _value == long.MinValue && _observationType == ObservationType.Maximum
+                        ? 0
+                        : _value;
             }
             set
             {
