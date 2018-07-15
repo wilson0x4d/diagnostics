@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
-using X4D.Diagnostics.Counters;
 
 namespace X4D.Diagnostics.Counters
 {

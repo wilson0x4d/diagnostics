@@ -28,6 +28,8 @@ A **Counter** provides a scalar result given an input series, such as a Total, R
 | `MovingAverage` | Calculates a Mean Average from a Finite Set, where new values cause older values to evict from the set (FIFO.) |
 | `RatePerSecond` | Provides a rate of values per second over the period specified. |
 | `SumTotal` | Tallies counts to produce a sum number of items." |
+| `ObservedValue` | Provides a value according to `ObservationType`, one of: `Last`, `Minimum` or `Maximum` |
+
 
 ## Categories
 
