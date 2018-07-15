@@ -10,7 +10,13 @@ namespace X4D.Diagnostics.Counters
         public void ObservedValue_BasicVerification()
         {
             var minObservedValue = new ObservedValue(ObservationType.Minimum);
+            Assert.AreEqual(0, minObservedValue.Value, "because an unused `ObservedValue` counter should not return a non-zero result.");
+            minObservedValue.Observe(1);
+            Assert.AreEqual(1, minObservedValue.Value, "because the first use of `ObservedValue` should always mutate the default state.");
             var maxObservedValue = new ObservedValue(ObservationType.Maximum);
+            Assert.AreEqual(0, maxObservedValue.Value, "because an unused ObservedValue counter should not return a non-zero result.");
+            maxObservedValue.Observe(-1);
+            Assert.AreEqual(-1, maxObservedValue.Value, "because the first use of `ObservedValue` should always mutate the default state.");
             var lastObservedValue = new ObservedValue(ObservationType.Last);
             var composite = new CompositeCounter()
                 .AddCounter(minObservedValue)
