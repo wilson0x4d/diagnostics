@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.1.0.0</Version>
     <Authors>Shaun Wilson x4d@mrshaunwilson.com</Authors>
@@ -12,14 +12,13 @@
     <PackageProjectUrl>https://github.com/wilson0x4d/diagnostics</PackageProjectUrl>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/3208827</PackageIconUrl>
     <PackageTags>netstandard system diagnostics performance counters telemetry</PackageTags>
-  </PropertyGroup>
+  </PropertyGroup> 
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\X4D.Diagnostics\X4D.Diagnostics.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\X4D.Diagnostics\X4D.Diagnostics.csproj" />
+    </ItemGroup>
 </Project>
