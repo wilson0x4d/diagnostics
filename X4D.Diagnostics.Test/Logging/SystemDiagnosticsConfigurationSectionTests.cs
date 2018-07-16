@@ -22,12 +22,12 @@ namespace X4D.Diagnostics.Configuration
             // performanceCounters
             Assert.AreEqual(123456, section.PerfCounters.FileMappingSize);
             // sources
-            Assert.AreEqual(3, section.Sources.Count);
+            Assert.AreEqual(4, section.Sources.Count);
             // trace
             Assert.AreEqual(true, section.Trace.AutoFlush);
             Assert.AreEqual(3, section.Trace.Listeners.Count);
             // sharedListeners
-            Assert.AreEqual(3, section.SharedListeners.Count);
+            Assert.AreEqual(4, section.SharedListeners.Count);
         }
 
         [TestMethod]

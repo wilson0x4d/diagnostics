@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <Version>0.1.0.0</Version>
+    <Authors>Shaun Wilson x4d@mrshaunwilson.com</Authors>
+    <Company>Shaun Wilson</Company>
+    <Description>Provides `TraceListener` implementations that are valid for use from .NET Standard assemblies over all supported platforms.</Description>
+    <Copyright>Copyright (C) Shaun Wilson</Copyright>
+    <PackageLicenseUrl>https://github.com/wilson0x4d/diagnostics/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/wilson0x4d/diagnostics</PackageProjectUrl>
+    <PackageTags>diagnostics tracelistener consoletracelistener udptracelistener splunk logstash graylog</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+</Project>

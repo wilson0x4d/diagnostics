@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\X4D.Diagnostics.Configuration\X4D.Diagnostics.Configuration.csproj" />
     <ProjectReference Include="..\X4D.Diagnostics.Counters\X4D.Diagnostics.Counters.csproj" />
+    <ProjectReference Include="..\X4D.Diagnostics.TraceListeners\X4D.Diagnostics.TraceListeners.csproj" />
     <ProjectReference Include="..\X4D.Diagnostics\X4D.Diagnostics.csproj" />
   </ItemGroup>
 
