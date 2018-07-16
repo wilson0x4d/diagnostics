@@ -161,15 +161,15 @@ namespace X4D.Diagnostics.TraceListeners
                 out string id);
             message = JsonEncodeString(message);
             return "{" +
-                $@" ""ts"":""{DateTime.UtcNow:o}""," +
-                $@" ""level"":""{level}""," +
-                $@" ""message"":""{message}""," +
-                $@" ""source"":""{source}""," +
-                $@" ""id"":""{source}""," +
-                $@" ""host"":""{Environment.MachineName}""," +
-                $@" ""pid"":{_processId}," +
-                $@" ""tid"":{System.Threading.Thread.CurrentThread.ManagedThreadId}" +
-                " }";
+                $@"""ts"":""{DateTime.UtcNow:o}""," +
+                $@"""level"":""{level}""," +
+                $@"""message"":""{message}""," +
+                $@"""source"":""{source}""," +
+                $@"""id"":{id}," +
+                $@"""host"":""{Environment.MachineName}""," +
+                $@"""pid"":{_processId}," +
+                $@"""tid"":{System.Threading.Thread.CurrentThread.ManagedThreadId}" +
+                "}";
         }
 
         private string ParseHeaderFromMessage(
