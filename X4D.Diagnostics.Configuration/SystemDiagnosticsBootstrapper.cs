@@ -274,9 +274,10 @@ namespace X4D.Diagnostics.Configuration
                         var traceListener = InstantiateTraceListener(traceListenerElement);
                         sharedListeners.Add(traceListener.Name, traceListener);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        ex.Log();
+                        // NOP: failure to instanciate a trace listener
+                        //      should not result in a log line.
                     }
                 }
             }
