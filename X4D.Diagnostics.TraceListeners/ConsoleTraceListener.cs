@@ -12,8 +12,9 @@ namespace X4D.Diagnostics.TraceListeners
         {
         }
 
-        public ConsoleTraceListener(Stream stream)
-            : base(stream)
+        // TOOD: protected ctor + test class
+        public ConsoleTraceListener(TextWriter textWriter)
+            : base(textWriter)
         {
         }
     }

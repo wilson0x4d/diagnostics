@@ -14,10 +14,12 @@ namespace X4D.Diagnostics.TraceListeners
         {
             var expectedText = Guid.NewGuid().ToString();
             using (var memoryStream = new MemoryStream())
-            using (var listener = new ConsoleTraceListener(memoryStream))
+            using (var textWriter = new StreamWriter(memoryStream))
+            using (var listener = new ConsoleTraceListener(textWriter))
             {
                 listener.WriteLine(expectedText);
                 listener.Flush();
+                textWriter.Flush();
                 var buf = memoryStream.ToArray();
                 var actualText = Encoding.UTF8.GetString(buf, 0, buf.Length);
                 Assert.IsTrue(actualText.Contains(expectedText));
