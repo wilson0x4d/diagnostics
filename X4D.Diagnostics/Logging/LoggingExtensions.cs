@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Linq;
 
 namespace X4D.Diagnostics.Logging
 {
@@ -70,8 +69,8 @@ namespace X4D.Diagnostics.Logging
                 GetTraceSource(callingType.Namespace, true)
                 ?.Switch
                 ?.ShouldTrace(eventType) == true
-                &&
-                GetTraceSource(callingType.FullName)
+                ||
+                GetTraceSource(DemangleTypeName(callingType.FullName))
                 ?.Switch
                 ?.ShouldTrace(eventType) == true;
         }
@@ -186,6 +185,14 @@ namespace X4D.Diagnostics.Logging
                 });
         }
 
+        private static string DemangleTypeName(string fullName)
+        {
+            var idx = fullName.IndexOf("+<");
+            return idx >= 0
+                ? fullName.Remove(idx)
+                : fullName;
+        }
+
         private static T TraceData<T>(
             T data,
             TraceEventType type,
@@ -210,7 +217,7 @@ namespace X4D.Diagnostics.Logging
                         type,
                         id,
                         message);
-                GetTraceSource(callingType.FullName)
+                GetTraceSource(DemangleTypeName(callingType.FullName))
                     ?.TraceData(
                         type,
                         id,
