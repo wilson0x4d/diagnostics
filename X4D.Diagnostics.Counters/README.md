@@ -27,7 +27,7 @@ A **Counter** provides a scalar result given an input series, such as a Total, R
 | `MedianAverage` | Calculates the Median Value of a Sorted Set. |
 | `MovingAverage` | Calculates a Mean Average from a Finite Set, where new values cause older values to evict from the set (FIFO.) |
 | `RatePerSecond` | Provides a rate of values per second over the period specified. |
-| `SumTotal` | Tallies counts to produce a sum number of items." |
+| `SumTotal` | Tallies counts to produce a sum number of items. |
 | `ObservedValue` | Provides a value according to `ObservationType`, one of: `Last`, `Minimum` or `Maximum` |
 
 
@@ -70,5 +70,5 @@ This allows us to define static members which are unique between subclasses but 
 
 ## Base Counters
 
-A **Base Counter** is typically used as a secondary component in counter value calculations, such as a denominator or multiplier. For example, `ItemsPerSecond64` is a subclass of `MeanAverage64` which uses an `ElapsedTime64` counter as a **BaseCounter** during construction.
+A **Base Counter** is typically used as a secondary component in counter value calculations, such as a denominator or multiplier. For example, `ItemsPerSecond` is a subclass of `MeanAverage` which uses an `ElapsedTime` counter as a **BaseCounter** during construction.
 

@@ -12,10 +12,10 @@ using X4D.Diagnostics.Logging;
 namespace X4D.Diagnostics.TraceListeners
 {
     [TestClass]
-    public sealed class UdpTraceListenerTests
+    public sealed class UdpJsonTraceListenerTests
     {
         [TestMethod]
-        public void UdpTraceListener_BasicVerification()
+        public void UdpJsonTraceListener_BasicVerification()
         {
             var expectedText = Guid.NewGuid().ToString();
             using (var udpServer = new UdpClient(514))

@@ -68,11 +68,11 @@ namespace X4D.Diagnostics.Logging
             return
                 GetTraceSource(callingType.Namespace, true)
                 ?.Switch
-                ?.ShouldTrace(eventType) == true
+                ?.ShouldTrace(eventType) != false
                 ||
                 GetTraceSource(DemangleTypeName(callingType.FullName))
                 ?.Switch
-                ?.ShouldTrace(eventType) == true;
+                ?.ShouldTrace(eventType) != false;
         }
 
         /// <summary>

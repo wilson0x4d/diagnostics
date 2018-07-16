@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X4D.Diagnostics.Benchmark",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X4D.Diagnostics.Configuration", "X4D.Diagnostics.Configuration\X4D.Diagnostics.Configuration.csproj", "{21B345EB-4DE5-44C9-86EF-B95A4858D221}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X4D.Diagnostics.TraceListeners", "X4D.Diagnostics.TraceListeners\X4D.Diagnostics.TraceListeners.csproj", "{52BC0740-E7C0-4BC7-A73C-EA57DC3E03FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X4D.Diagnostics.TraceListeners", "X4D.Diagnostics.TraceListeners\X4D.Diagnostics.TraceListeners.csproj", "{52BC0740-E7C0-4BC7-A73C-EA57DC3E03FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

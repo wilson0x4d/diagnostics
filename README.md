@@ -19,7 +19,8 @@ Shared interfaces, implementations and tools for an improved Diagnostic experien
 	* [Logging `TextReader` objects](#logging-textreader-objects)
 * [Custom Trace Listeners](#custom-trace-listeners)
 	* [Listener: `ConsoleTraceListener`](#listener-consoletracelistener)
-	* [Listener: `UdpTraceListener`](#listener-udptracelistener)
+	* [Listener: `ConsoleUdpTraceListener`](#listener-consoleudptracelistener)
+	* [Listener: `UdpJsonTraceListener`](#listener-udpjsontracelistener)
 * [Bootstrapping `<system.diagnostics/>` in .NET Core](#bootstrapping-systemdiagnostics-in-net-core)
 
 <!-- /code_chunk_output -->
@@ -223,16 +224,23 @@ You can add it to your diagnostics config like so:
          type="X4D.Diagnostics.TraceListeners.ConsoleTraceListener,X4D.Diagnostics.TraceListeners" />
 ```
 
+### Listener: `ConsoleUdpTraceListener`
 
-### Listener: `UdpTraceListener`
+Similar to `ConsoleTraceListener` except it subclasses `JsonWriterTraceListener` to emit JSON formatted output.
 
-This UDP trace listener currently only supports a JSON payload (minimally constructed), and utilizes `UdpClient` internally.
+```xml
+    <add name="ConsoleLog"
+         type="X4D.Diagnostics.TraceListeners.ConsoleUdpTraceListener,X4D.Diagnostics.TraceListeners"
+         wrapWrites="true" />
+```
 
-The intended purpose is to allow the delivery of trace events to a log server (Splunk, graylog2, logstash, etc.) -- a fairly common practice.
+### Listener: `UdpJsonTraceListener`
+
+This trace listener creates a JSON payload, it utilizes `UdpClient` and `Newtonsoft.Json.JsonConvert` internally. The intended purpose is to allow the delivery of trace events to a log server (Splunk, Graylog2, logstash, etc.) -- a fairly common practice.
 
 ```xml
     <add name="UdpLog"
-         type="X4D.Diagnostics.TraceListeners.UdpTraceListener,X4D.Diagnostics.TraceListeners"
+         type="X4D.Diagnostics.TraceListeners.UdpJsonTraceListener,X4D.Diagnostics.TraceListeners"
          initializeData="localhost:514"/>
 ```
 
