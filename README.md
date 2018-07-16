@@ -17,18 +17,22 @@ Shared interfaces, implementations and tools for an improved Diagnostic experien
 	* [Logging `String` objects](#logging-string-objects)
 	* [Logging `StringBuilder` objects](#logging-stringbuilder-objects)
 	* [Logging `TextReader` objects](#logging-textreader-objects)
+* [Custom Trace Listeners](#custom-trace-listeners)
+	* [Listener: `ConsoleTraceListener`](#listener-consoletracelistener)
+	* [Listener: `UdpTraceListener`](#listener-udptracelistener)
+* [Bootstrapping `<system.diagnostics/>` in .NET Core](#bootstrapping-systemdiagnostics-in-net-core)
 
 <!-- /code_chunk_output -->
 
 
 ## Counters
 
-the `X4D.Diagnostics.Counters` namespace exposes a lightweight framework for defining performance counters, categories of counters, and to easily access cached instances of those counters at run-time.
+the `X4D.Diagnostics.Counters` namespace exposes a lightweight framework for defining performance counters, categories of counters, and to easily access cached instances of those counters at run-time. 
 
 
 ### Counter Integration
 
-Consider the following code which increments the counters `InPerSec`, `ErrorsPerSec` and `OutPerSec` and `PendingTimeAverage`:
+Consider the following code which increments the counters `InPerSec`, `ErrorsPerSec`, `OutPerSec` and `PendingTimeAverage`:
 
 ```csharp
     public sealed class Foo
@@ -202,3 +206,68 @@ Output:
 Information: 4 : 4e20b9c7-954b-4a2a-aac5-ee006d0810be
 ```
 
+
+## Custom Trace Listeners
+
+Distributed in a standalone package [X4D.Diagnostics.TraceListeners](https://www.nuget.org/packages/X4D.Diagnostics.TraceListeners) is a small, lightweight set of `TraceListener` implementations valid for use from **.NET Standard**, **.NET Core** and **.NET Framework**.
+
+
+### Listener: `ConsoleTraceListener`
+
+The implmentation provided is similar to that of .NET Framework, and does not provide any configuration options. It has been added because there is no default implementation in .NET Core / .NET Standard as everyone expects.
+
+You can add it to your diagnostics config like so:
+
+```xml
+    <add name="ConsoleLog"
+         type="X4D.Diagnostics.TraceListeners.ConsoleTraceListener,X4D.Diagnostics.TraceListeners" />
+```
+
+
+### Listener: `UdpTraceListener`
+
+This UDP trace listener currently only supports a JSON payload (minimally constructed), and utilizes `UdpClient` internally.
+
+The intended purpose is to allow the delivery of trace events to a log server (Splunk, graylog2, logstash, etc.) -- a fairly common practice.
+
+```xml
+    <add name="UdpLog"
+         type="X4D.Diagnostics.TraceListeners.UdpTraceListener,X4D.Diagnostics.TraceListeners"
+         initializeData="localhost:514"/>
+```
+
+Take note that the UDP Host Name and Port Number can be customized using `initializeData`, in the example above you see the default config if no value is specified (allowing for a local log ingest by default, using a relatively common default port number.)
+
+The resulting UDP messages contain a payload with the following structure:
+
+```json
+{
+    "ts" : "2018-07-16T11:30:04.1553089Z",
+    "level" : "Information",
+    "message" : "a543baf1-097d-45fb-ac0f-feec44463058",
+    "source" : "My.Program",
+    "id" : 5,
+    "host" : "DESKTOP-XYZ123",
+    "pid" : 18593,
+    "tid" : 1977
+}
+```
+
+When delivered via the UDP the whitepsace shown above is NOT present, instead, all content appears condensed and on a single line.
+
+
+## Bootstrapping `<system.diagnostics/>` in .NET Core
+
+You will notice that under .NET Core your `<system.diagnostics/>` config section is NOT automatically loaded, and none of the behavior you might expect is present.
+
+Distributed in a standalone package [X4D.Diagnostics.Configuration](https://www.nuget.org/packages/X4D.Diagnostics.Configuration) provides a bootstrapper to workaround this problem.
+
+This bootstrapper is automatically activated the first time you use any of the `Log()` extension methods shown above.
+
+You can manually bootstrap (for whatever reason) by including the following code in your program:
+
+```csharp
+    X4D.Diagnostics.Configuration.SystemDiagnosticsBootstrapper.Configure();
+```
+
+This can be useful if you're not using any of the extension methods, or if you need to control order of initialization vs. other components.
