@@ -34,11 +34,17 @@ namespace X4D.Diagnostics.Configuration
         public TraceOptions TraceOutputOptions
         {
             get =>
-                (Enum.TryParse(base["traceOutputOptions"] as string, true, out TraceOptions traceOptions))
-                    ? traceOptions
-                    : TraceOptions.DateTime | TraceOptions.ProcessId | TraceOptions.ThreadId;
+                (TraceOptions)(base["traceOutputOptions"] ?? TraceOptions.None);
             internal set =>
-                base["traceOutputOptions"] = Convert.ToString(value);
+                base["traceOutputOptions"] = value;
+        }
+
+        protected override bool OnDeserializeUnrecognizedAttribute(string name, string value)
+        {
+            Properties.Add(
+                new ConfigurationProperty(name, typeof(string)));
+            base[name] = value;
+            return true;
         }
     }
 }
