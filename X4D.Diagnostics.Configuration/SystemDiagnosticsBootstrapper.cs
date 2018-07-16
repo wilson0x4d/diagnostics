@@ -27,8 +27,7 @@ namespace X4D.Diagnostics.Configuration
         private static IDictionary<string, TraceListener> _listeners;
         private static IDictionary<string, TraceSource> _sources;
 
-        public static TraceSource GetConfiguredSource(
-            string name)
+        public static TraceSource GetConfiguredSource(string name)
         {
             var traceSource = default(TraceSource);
             if (_sources == null)

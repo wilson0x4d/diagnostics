@@ -67,7 +67,7 @@ namespace X4D.Diagnostics.Logging
                 .GetMethod()
                 .DeclaringType;
             return
-                GetTraceSource(callingType.Namespace)
+                GetTraceSource(callingType.Namespace, true)
                 ?.Switch
                 ?.ShouldTrace(eventType) == true
                 &&
@@ -156,7 +156,8 @@ namespace X4D.Diagnostics.Logging
         }
 
         internal static TraceSource GetTraceSource(
-            string traceSourceName)
+            string traceSourceName,
+            bool isNamespaceName = false)
         {
             if (string.IsNullOrWhiteSpace(traceSourceName))
             {
@@ -173,7 +174,15 @@ namespace X4D.Diagnostics.Logging
                         var getConfiguredSource = bootstrapperType.GetMethod("GetConfiguredSource", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
                         traceSource = getConfiguredSource.Invoke(null, new object[] { L_traceSourceName }) as TraceSource;
                     }
-                    return traceSource ?? new TraceSource(L_traceSourceName, SourceLevels.Off);
+                    if (traceSource == null)
+                    {
+                        traceSource = new TraceSource(
+                            L_traceSourceName,
+                            isNamespaceName
+                                ? SourceLevels.Off
+                                : SourceLevels.All);
+                    }
+                    return traceSource;
                 });
         }
 
@@ -196,7 +205,7 @@ namespace X4D.Diagnostics.Logging
             }
             else
             {
-                GetTraceSource(callingType.Namespace)
+                GetTraceSource(callingType.Namespace, true)
                     ?.TraceData(
                         type,
                         id,
@@ -210,8 +219,7 @@ namespace X4D.Diagnostics.Logging
             return data;
         }
 
-        private static string Normalize(
-            string input)
+        private static string Normalize(string input)
         {
             return _normalizeRegex.Replace(input, " ");
         }
@@ -233,8 +241,7 @@ namespace X4D.Diagnostics.Logging
                     : Convert.ToString(data));
         }
 
-        private static string FullDataDump(
-            Exception ex)
+        private static string FullDataDump(Exception ex)
         {
             if (ex.Data == null || ex.Data.Count == 0)
             {

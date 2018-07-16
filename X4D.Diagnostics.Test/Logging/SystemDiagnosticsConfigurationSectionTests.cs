@@ -1,14 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
-using System.Reflection;
 using System.Text;
-using X4D.Diagnostics.Configuration;
 using X4D.Diagnostics.Fakes;
 
-namespace X4D.Diagnostics.Logging
+namespace X4D.Diagnostics.Configuration
 {
     [TestClass]
     public class SystemDiagnosticsConfigurationSectionTests
@@ -42,7 +38,7 @@ namespace X4D.Diagnostics.Logging
 
             Trace.Write(expectedMessage);
 
-            // verify             
+            // verify
             foreach (var traceListener in Trace.Listeners)
             {
                 if (traceListener is FakeTraceListener fakeTraceListener)
