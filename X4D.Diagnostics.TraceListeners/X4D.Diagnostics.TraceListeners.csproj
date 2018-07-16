@@ -11,6 +11,7 @@
     <PackageProjectUrl>https://github.com/wilson0x4d/diagnostics</PackageProjectUrl>
     <PackageTags>diagnostics tracelistener consoletracelistener udptracelistener splunk logstash graylog</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/3208827</PackageIconUrl>
   </PropertyGroup>
 
 </Project>
