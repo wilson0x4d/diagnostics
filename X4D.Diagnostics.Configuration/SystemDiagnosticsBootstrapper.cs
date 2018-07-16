@@ -88,8 +88,8 @@ namespace X4D.Diagnostics.Configuration
             {
                 _switches = InstantiateSwitches(systemDiagnosticsConfigurationSection);
                 _listeners = InstantiateSharedListeners(systemDiagnosticsConfigurationSection);
-                _sources = InstantiateSources(systemDiagnosticsConfigurationSection, _switches, _listeners);
                 InitializeTraceTraceListeners(systemDiagnosticsConfigurationSection);
+                _sources = InstantiateSources(systemDiagnosticsConfigurationSection, _switches, _listeners);
             }
             return systemDiagnosticsConfigurationSection;
         }
