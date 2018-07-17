@@ -250,14 +250,13 @@ The resulting UDP messages contain a payload with the following structure:
 
 ```json
 {
-    "ts" : "2018-07-16T11:30:04.1553089Z",
-    "level" : "Information",
-    "message" : "a543baf1-097d-45fb-ac0f-feec44463058",
-    "source" : "My.Program",
-    "id" : 5,
-    "host" : "DESKTOP-XYZ123",
-    "pid" : 18593,
-    "tid" : 1977
+  "ts": "2018-07-16T23:58:27.1930455Z",
+  "source": "X4D.Diagnostics.TraceListeners",
+  "type": "Information",
+  "id": 5,
+  "data": "76193a3d-782a-47ae-b53e-eaa2256d5b50",
+  "host": "DESKTOP-VCT4TJ7",
+  "user": "Hacker"
 }
 ```
 
