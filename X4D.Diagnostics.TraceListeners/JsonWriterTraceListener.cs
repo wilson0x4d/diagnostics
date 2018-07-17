@@ -23,7 +23,7 @@ namespace X4D.Diagnostics.TraceListeners
             {
                 ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
                 DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
-                Formatting = Formatting.None,
+                Formatting = Formatting.Indented,
                 NullValueHandling = NullValueHandling.Ignore,
                 TypeNameHandling = TypeNameHandling.None
             };
@@ -126,7 +126,9 @@ namespace X4D.Diagnostics.TraceListeners
                 Timestamp = timestamp,
                 Source = source,
                 Id = id,
-                Type = eventType.ToString()
+                Type = eventType.ToString(),
+                Host = Environment.MachineName,
+                User = Environment.UserName,
             };
             if (TraceOutputOptions != TraceOptions.None)
             {
@@ -223,10 +225,16 @@ namespace X4D.Diagnostics.TraceListeners
             [DataMember(Name = "pid", Order = 7)]
             public int ProcessId { get; internal set; }
 
-            [DataMember(Name = "lstack", Order = 8)]
+            [DataMember(Name = "host", Order = 8)]
+            public string Host { get; set; }
+
+            [DataMember(Name = "user", Order = 9)]
+            public string User { get; set; }
+
+            [DataMember(Name = "lstack", Order = 10)]
             public Stack LogicalOperationStack { get; internal set; }
 
-            [DataMember(Name = "stack", Order = 9)]
+            [DataMember(Name = "stack", Order = 11)]
             public string Callstack { get; internal set; }
         }
     }
