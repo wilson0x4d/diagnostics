@@ -321,14 +321,7 @@ namespace X4D.Diagnostics.Logging
                 sb.AppendLine("!!! ERROR BUILDING STACK TRACE - EXCEPTION FOLLOWS !!!");
                 AppendException(sb, L_ex);
             }
-            if (LoggingExtensions.Settings.ShouldNormalizeMessages)
-            {
-                return sb.Replace(Environment.NewLine, "").ToString();
-            }
-            else
-            {
-                return sb.ToString();
-            }
+            return sb.ToString().TrimEnd(s_crlfCharacters);
         }
 
         private static void AppendException(StringBuilder sb, Exception ex)
