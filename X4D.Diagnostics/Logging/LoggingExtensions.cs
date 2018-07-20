@@ -30,27 +30,14 @@ namespace X4D.Diagnostics.Logging
         /// explicitly configured it is not logged to.
         /// </para>
         /// </summary>
-        private static readonly ConcurrentDictionary<string/*TraceContext*/, TraceSource> _sources =
+        private static readonly ConcurrentDictionary<string/*TraceContext*/, TraceSource> s_sources =
             new ConcurrentDictionary<string, TraceSource>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// A regex to normalize log events such that they appear on a single line.
         /// </summary>
-        private static readonly Regex _normalizeRegex = new Regex(@"[\s]+");
+        private static readonly Regex s_normalizeRegex = new Regex(@"[\s]+");
 
-        public static class Settings
-        {
-            /// <summary>
-            /// A boolean indicating whether or not `Log` methods will normalize
-            /// message content before tracing.
-            /// <para>Default is true.</para>
-            /// <para>
-            /// Normalization reduces all whitespace down to a single character
-            /// (tabs, carriage returns, line feeds, etc.)
-            /// </para>
-            /// </summary>
-            public static bool ShouldNormalizeMessages { get; set; } = true;
-        }
         private static readonly char[] s_crlfCharacters = Environment.NewLine.ToCharArray();
 
         /// <summary>
@@ -59,7 +46,10 @@ namespace X4D.Diagnostics.Logging
         private static int _id = 0;
 
         /// <summary>
-        /// <para>Check if a particular .NET `Trace Event Type` is enabled for the current trace source.</para>
+        /// <para>
+        /// Check if a particular .NET `Trace Event Type` is enabled for the
+        /// current trace source.
+        /// </para>
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -130,8 +120,8 @@ namespace X4D.Diagnostics.Logging
         }
 
         /// <summary>
-        /// Log the specified <see cref="StringBuilder"/>, optionally specifying
-        /// <paramref name="type"/> and <paramref name="traceSourceName"/>.
+        /// Log the specified <see cref="StringBuilder"/>, optionally
+        /// specifying <paramref name="type"/> and <paramref name="traceSourceName"/>.
         /// </summary>
         /// <param name="data"></param>
         /// <param name="type">Default is <see cref="TraceEventType.Information"/></param>
@@ -169,7 +159,7 @@ namespace X4D.Diagnostics.Logging
             return data;
         }
 
-        internal static TraceSource GetTraceSource(
+        private static TraceSource GetTraceSource(
             string traceSourceName,
             bool isNamespaceName = false)
         {
@@ -177,7 +167,7 @@ namespace X4D.Diagnostics.Logging
             {
                 throw new ArgumentException($"IsNullOrWhiteSpace", nameof(traceSourceName));
             }
-            return _sources.GetOrAdd(
+            return s_sources.GetOrAdd(
                 traceSourceName,
                 (L_traceSourceName) =>
                 {
@@ -242,7 +232,7 @@ namespace X4D.Diagnostics.Logging
 
         private static string Normalize(string input)
         {
-            return _normalizeRegex.Replace(input, " ");
+            return s_normalizeRegex.Replace(input, " ");
         }
 
         private static object BuildMessage<T>(T data)
@@ -300,11 +290,9 @@ namespace X4D.Diagnostics.Logging
             return sb.ToString();
         }
 
-        /// <summary>
-        /// <para>Produces a "deep" Stack Trace for exceptions, and includes
-        /// </summary>
-        /// <param name="ex">`Exception` and/or `FaultException`</param>
-        /// <returns></returns>
+        /// <summary> <para>Produces a "deep" Stack Trace for exceptions, and
+        /// includes </summary> <param name="ex">`Exception` and/or
+        /// `FaultException`</param> <returns></returns>
         private static string BuildFullStackTrace(Exception ex)
         {
             var sb = new StringBuilder();
@@ -334,6 +322,20 @@ namespace X4D.Diagnostics.Logging
                     sb.AppendLine(ex.StackTrace);
                 }
             }
+        }
+
+        public static class Settings
+        {
+            /// <summary>
+            /// A boolean indicating whether or not `Log` methods will
+            /// normalize message content before tracing.
+            /// <para>Default is true.</para>
+            /// <para>
+            /// Normalization reduces all whitespace down to a single
+            /// character (tabs, carriage returns, line feeds, etc.)
+            /// </para>
+            /// </summary>
+            public static bool ShouldNormalizeMessages { get; set; } = true;
         }
     }
 }
