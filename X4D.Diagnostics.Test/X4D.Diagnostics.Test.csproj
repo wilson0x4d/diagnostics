@@ -29,9 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TraceListeners\X4D.Diagnostics.JsonTextWriterTraceListener\X4D.Diagnostics.JsonTextWriterTraceListener.csproj" />
+    <ProjectReference Include="..\TraceListeners\X4D.Diagnostics.UdpJsonTraceListener\X4D.Diagnostics.UdpJsonTraceListener.csproj" />
     <ProjectReference Include="..\X4D.Diagnostics.Configuration\X4D.Diagnostics.Configuration.csproj" />
+    <ProjectReference Include="..\X4D.Diagnostics.ConsoleJsonTraceListener\X4D.Diagnostics.ConsoleJsonTraceListener.csproj" />
+    <ProjectReference Include="..\X4D.Diagnostics.ConsoleTraceListener\X4D.Diagnostics.ConsoleTraceListener.csproj" />
     <ProjectReference Include="..\X4D.Diagnostics.Counters\X4D.Diagnostics.Counters.csproj" />
-    <ProjectReference Include="..\X4D.Diagnostics.TraceListeners\X4D.Diagnostics.TraceListeners.csproj" />
     <ProjectReference Include="..\X4D.Diagnostics\X4D.Diagnostics.csproj" />
   </ItemGroup>
 

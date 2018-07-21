@@ -6,20 +6,20 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace X4D.Diagnostics.TraceListeners
+namespace X4D.Diagnostics
 {
     /// <summary>
     /// <para>adapted from https://gist.github.com/wilson0x4d/8704422</para>
     /// </summary>
     public class UdpJsonTraceListener
-        : JsonWriterTraceListener
+        : JsonTextWriterTraceListener
     {
         private readonly UdpClient _udpClient = new UdpClient();
 
         private readonly ConcurrentQueue<string> _messageQueue = new ConcurrentQueue<string>();
 
         private StringBuilder _messageBuilder = new StringBuilder();
-
+         
         public UdpJsonTraceListener()
         {
             var initializeData = base.Attributes["initializeData"] as string;

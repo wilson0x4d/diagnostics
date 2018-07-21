@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace X4D.Diagnostics.TraceListeners
+namespace X4D.Diagnostics
 {
     /// <summary>
     /// A `TraceListener` implementation which outputs data as line-delimited
@@ -15,7 +15,7 @@ namespace X4D.Diagnostics.TraceListeners
     /// Used as the basis for other, similar `JsonXxxTraceListener` implementations.
     /// </para>
     /// </summary>
-    public abstract class JsonWriterTraceListener :
+    public abstract class JsonTextWriterTraceListener :
         TraceListener
     {
         private static readonly JsonSerializerSettings s_defaultSerializerSettings =
@@ -34,18 +34,18 @@ namespace X4D.Diagnostics.TraceListeners
 
         private StringBuilder _messageBuilder = new StringBuilder();
 
-        public JsonWriterTraceListener()
+        public JsonTextWriterTraceListener()
             : base()
         {
             _serializerSettings = s_defaultSerializerSettings;
         }
 
-        public JsonWriterTraceListener(string name)
+        public JsonTextWriterTraceListener(string name)
             : this(name, s_defaultSerializerSettings)
         {
         }
 
-        public JsonWriterTraceListener(string name, JsonSerializerSettings serializerSettings)
+        public JsonTextWriterTraceListener(string name, JsonSerializerSettings serializerSettings)
             : base(name)
         {
             _serializerSettings = serializerSettings;

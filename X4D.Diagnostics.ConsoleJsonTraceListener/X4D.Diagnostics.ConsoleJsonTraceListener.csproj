@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <RootNamespace>X4D.Diagnostics</RootNamespace>
     <Version>0.0.0.0</Version>
     <Authors>Shaun Wilson x4d@mrshaunwilson.com</Authors>
     <Company>Shaun Wilson</Company>
-    <Description>This package exists to solve problems with loading the `system.diagnostics` config section under **.NET Core**.</Description>
     <Copyright>Copyright (C) Shaun Wilson</Copyright>
     <PackageLicenseUrl>https://github.com/wilson0x4d/diagnostics/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/wilson0x4d/diagnostics</PackageProjectUrl>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/3208827</PackageIconUrl>
-    <PackageTags>netstandard system diagnostics configuration</PackageTags>
+    <PackageTags>system diagnostics logging console tracelistener consoletracelistener</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Provides a "Console TraceListener" implementation which emits trace events formatted using JSON.</Description>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <FileVersion>0.0.0.0</FileVersion>
   </PropertyGroup>
@@ -21,10 +22,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TraceListeners\X4D.Diagnostics.JsonTextWriterTraceListener\X4D.Diagnostics.JsonTextWriterTraceListener.csproj" />
     <ProjectReference Include="..\X4D.Diagnostics\X4D.Diagnostics.csproj" />
   </ItemGroup>
 

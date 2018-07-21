@@ -6,7 +6,7 @@
     <OutputType>Library</OutputType>
     <StartupObject />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.0.0</Version>
+    <Version>0.0.0.0</Version>
     <Authors>Shaun Wilson x4d@mrshaunwilson.com</Authors>
     <Company>Shaun Wilson</Company>
     <Description>Shared interfaces and extension methods for Performance Counters and Logging.</Description>
