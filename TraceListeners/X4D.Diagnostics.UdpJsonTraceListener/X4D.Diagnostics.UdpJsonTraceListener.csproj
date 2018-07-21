@@ -10,7 +10,7 @@
     <PackageLicenseUrl>https://github.com/wilson0x4d/diagnostics/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/wilson0x4d/diagnostics</PackageProjectUrl>
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/3208827</PackageIconUrl>
-    <PackageTags>netstandard system diagnostics logging udp json tracelistener</PackageTags>
+    <PackageTags>netstandard system diagnostics logging udp json tracelistener diagnostics console udp json tracelistener splunk logstash graylog</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Provides a "UDP Trace Listener" implementation which emits trace events formatted using JSON.</Description>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>

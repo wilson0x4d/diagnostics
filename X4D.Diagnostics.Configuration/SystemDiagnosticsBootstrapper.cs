@@ -141,12 +141,19 @@ namespace X4D.Diagnostics.Configuration
                                     : $"{SourceLevels.All}";
                     if (!string.IsNullOrWhiteSpace(sourceElement.SwitchType))
                     {
-                        traceSource.Switch =
-                            Activator.CreateInstance(
-                                Type.GetType(sourceElement.SwitchType),
-                                sourceElement.SwitchName ?? $"{sourceElement.Name}",
-                                switchValue)
-                            as SourceSwitch;
+                        try
+                        {
+                            traceSource.Switch =
+                                Activator.CreateInstance(
+                                    Type.GetType(sourceElement.SwitchType),
+                                    sourceElement.SwitchName ?? $"{sourceElement.Name}",
+                                    switchValue)
+                                as SourceSwitch;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception($"Failed to load SourceSwitch '{sourceElement.SwitchName ?? sourceElement.Name}': {sourceElement.SwitchType}", ex);
+                        }
                     }
                     else if (switches.TryGetValue(sourceElement.SwitchName, out Switch @switch))
                     {
@@ -222,8 +229,16 @@ namespace X4D.Diagnostics.Configuration
         private static TraceListener InstantiateTraceListener(
             TraceListenerElement traceListenerElement)
         {
-            var traceListenerType = Type.GetType(traceListenerElement.TypeName);
-            var traceListener = Activator.CreateInstance(traceListenerType) as TraceListener;
+            TraceListener traceListener;
+            try
+            {
+                var traceListenerType = Type.GetType(traceListenerElement.TypeName);
+                traceListener = Activator.CreateInstance(traceListenerType) as TraceListener;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to load TraceListener '{traceListenerElement?.Name}': {traceListenerElement?.TypeName}", ex);
+            }
             traceListener.Name = traceListenerElement.Name;
             traceListener.TraceOutputOptions = traceListenerElement.TraceOutputOptions;
             if (traceListenerElement.Filter != null)
@@ -245,9 +260,16 @@ namespace X4D.Diagnostics.Configuration
                     }
                     else
                     {
-                        traceListener.Filter = string.IsNullOrWhiteSpace(traceListenerElement.Filter.InitializeData)
-                            ? Activator.CreateInstance(filterType, traceListenerElement.Filter.InitializeData) as TraceFilter
-                            : Activator.CreateInstance(filterType, traceListenerElement.Filter.InitializeData) as TraceFilter;
+                        try
+                        {
+                            traceListener.Filter = string.IsNullOrWhiteSpace(traceListenerElement.Filter.InitializeData)
+                                ? Activator.CreateInstance(filterType) as TraceFilter
+                                : Activator.CreateInstance(filterType, traceListenerElement.Filter.InitializeData) as TraceFilter;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception($"Failed to load TraceFilter '{traceListenerElement?.Name}': {traceListenerElement?.TypeName}", ex);
+                        }
                     }
                 }
             }
